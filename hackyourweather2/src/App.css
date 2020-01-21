@@ -1,0 +1,24 @@
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.weather-content {
+  background: url("https://image.freepik.com/free-photo/cloud-blue-sky_1232-3108.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.sm {
+  width: 30%;
+  display: flex;
+}
+footer {
+  color: white;
+}
+footer a {
+  color: white;
+  padding: 10px;
+}
+
+section {
+  height: calc(100vh - 56px - 56px);
+}

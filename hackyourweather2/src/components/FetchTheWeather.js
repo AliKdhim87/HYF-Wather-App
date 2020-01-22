@@ -8,20 +8,15 @@ const FetchTheWeather = () => {
   const [fetchData, setFetchData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  let openwetherkey;
-  if (process.env.NODE_ENV !== "production") {
-    openwetherkey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-  } else {
-    openwetherkey = process.env.OPENWEATHERMAP_API_KEY;
-  }
+
   // Get city name
   const searchCity = async (city = "utrecht") => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
           city
-        )}&appid=${openwetherkey}&units=metric`
+        )}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`
       );
 
       const data = await res.json();

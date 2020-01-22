@@ -3,7 +3,7 @@ import React from "react";
 const DisplayTheWeather = ({ fetchData }) => {
   if (fetchData.cod >= 400)
     return (
-      <div class='alert alert-primary text-center' role='alert'>
+      <div className='alert alert-primary text-center' role='alert'>
         No city found, Write a City name to get Your forecast weather
       </div>
     );

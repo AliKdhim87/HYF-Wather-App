@@ -4,7 +4,6 @@ const Search = ({ searchCity }) => {
   const onSubmit = e => {
     e.preventDefault();
     searchCity(cityName);
-    setCityName("");
   };
 
   const onChange = e => setCityName(e.target.value);

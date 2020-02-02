@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Alert from "./layout/Alert";
 import DisplayTheWeather from "./DisplayTheWeather";
 import Search from "./Search";
 import Spinner from "../components/layout/Spinner";
 import Error from "../components/layout/Error";
-const FetchTheWeather = () => {
+
+const FetchTheWeather = ({ match }) => {
   const [fetchData, setFetchData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [cityList, setCityList] = useState([]);
 
   // Get city name
+
   const searchCity = async city => {
     setLoading(true);
     try {
@@ -23,24 +25,20 @@ const FetchTheWeather = () => {
       const data = await res.json();
 
       setFetchData(data);
+      setLoading(false);
       if (data.cod === 200) {
         setCityList(currntCity => [...currntCity, data]);
       }
-
-      setLoading(false);
     } catch (e) {
       setError(true);
       setLoading(false);
     }
   };
+
   // Romove City
   const removeCityById = id => {
     setCityList(cityList.filter(city => city.id !== id));
   };
-  useEffect(() => {
-    searchCity();
-    // eslint-disable-next-line
-  }, []);
 
   if (error) return <Error />;
   if (loading) return <Spinner />;
@@ -48,13 +46,16 @@ const FetchTheWeather = () => {
   return (
     <>
       <Search searchCity={searchCity} />
-      {cityList.map(city => (
-        <DisplayTheWeather
-          city={city}
-          key={city.id}
-          removeCityById={removeCityById}
-        />
-      ))}
+      {cityList.length === 0
+        ? ""
+        : cityList.map(city => (
+            <DisplayTheWeather
+              city={city}
+              key={city.id}
+              removeCityById={removeCityById}
+            />
+          ))}
+
       <Alert fetchData={fetchData} />
     </>
   );

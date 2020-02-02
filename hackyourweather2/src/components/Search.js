@@ -19,7 +19,7 @@ const Search = ({ searchCity }) => {
           value={cityName}
           onChange={onChange}
         />
-        <button type='submit' className='btn btn-primary btn-block mt-3'>
+        <button type='submit' className='btn btn-dark btn-block mt-3'>
           Search
         </button>
       </form>

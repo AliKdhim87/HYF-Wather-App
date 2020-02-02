@@ -22,3 +22,22 @@ footer a {
 section {
   min-height: calc(100vh - 56px - 56px);
 }
+@media (max-width: 576px) {
+  .xs {
+    width: 50%;
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: 1.3rem;
+  }
+  h1 {
+    font-size: 1.7rem;
+  }
+  .weather-detail-content {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+  }
+}

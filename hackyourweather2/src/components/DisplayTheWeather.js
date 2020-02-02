@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
+import { Link } from "react-router-dom";
 const DisplayTheWeather = ({ city, removeCityById }) => {
   return (
     <div className='row'>
@@ -28,7 +28,12 @@ const DisplayTheWeather = ({ city, removeCityById }) => {
                 width='80'
               />
             </div>
-
+            <Link
+              to={`/weatherDetails/${city.id}`}
+              className='mb-2 btn btn-dark'
+            >
+              Get more weather info
+            </Link>
             <div className='overlay col-lg-12'>
               <p className='lead p-2'>
                 <b>min temp:</b> {Math.floor(city.main.temp_min)} °C

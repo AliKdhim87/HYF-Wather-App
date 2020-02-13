@@ -1,19 +1,17 @@
 import React from "react";
 import calendar from "./icons/calendar.png";
 import flags from "./icons/flags.png";
+import Moment from "react-moment";
+
 import "../App.css";
 const WeatherDetails = ({ weather }) => {
-  const convertDate = new Date(weather.dt_txt).toLocaleDateString("en-NL");
-
   return (
     <div>
       <div className='row p-2 bg-light text-dark text-center'>
         <div className='col-lg-4 col-sm-4 col-xs-12'>
           <h2>
             <img src={calendar} alt='icon' />{" "}
-            {parseInt(weather.dt_txt.slice(10)) === 0
-              ? convertDate
-              : weather.dt_txt.slice(10, -3)}
+            <Moment format='MMMM Do YYYY. h:mm: a'>{weather.dt_txt}</Moment>
           </h2>
         </div>
         <div className='col-lg-4 col-sm-4 xs'>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import WeatherDetails from "./WeatherDetails";
 import Spinner from "./layout/Spinner";
 import Error from "./layout/Error";
+import WeatherContext from "../context/weather/weatherContext";
 import {
   AreaChart,
   Area,
@@ -13,33 +14,17 @@ import {
   ResponsiveContainer
 } from "recharts";
 const FetchWeatherDetails = ({ match }) => {
-  const [weatherDetails, setWeatherDetails] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  // Get Weather detail
-  const fetchDetails = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?id=${match.params.id}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`
-      );
-      const data = await res.json();
-      setWeatherDetails(data);
-
-      setLoading(false);
-    } catch (error) {
-      setError(true);
-      setLoading(false);
-    }
-  };
+  const weatherContext = useContext(WeatherContext);
+  const { weatherDetails, fetchDetails, loading, error } = weatherContext;
+  const id = match.params.id;
 
   useEffect(() => {
-    fetchDetails();
+    fetchDetails(id);
     // eslint-disable-next-line
   }, []);
-  if (loading) return <Spinner />;
+  if (loading || weatherDetails === null) return <Spinner />;
   if (error) return <Error />;
-  if (weatherDetails === null) return <Spinner />;
+
   return (
     <div>
       <h1 className='text-center'>Weather Details</h1>
@@ -65,7 +50,7 @@ const FetchWeatherDetails = ({ match }) => {
             dataKey='main.temp'
             stroke='#8884d8'
             fill='#8884d8'
-            // barSize={250}
+            barSize={250}
           />
         </AreaChart>
       </ResponsiveContainer>

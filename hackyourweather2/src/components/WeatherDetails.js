@@ -23,7 +23,7 @@ const WeatherDetails = ({ weather }) => {
           />
         </div>
         <div className='col-lg-4 col-sm-4 xs'>
-          <h2>{Math.round(weather.wind.speed)} km/h</h2>
+          <h2>{Math.floor(weather.wind.speed)} km/h</h2>
           <img src={flags} alt='icon' />
         </div>
       </div>
